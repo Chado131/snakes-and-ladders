@@ -100,12 +100,24 @@ public class SwingGUI extends JComponent{
             }
         }
 
+        ArrayList<Color> colors = new ArrayList<>();
+        colors.add(new Color(0, 128, 255));
+        colors.add(new Color(77, 3, 157));
+        colors.add(new Color(255, 0, 174));
+        colors.add(new Color(0, 255, 111));
+        colors.add(new Color(91, 147, 7));
+        colors.add(new Color(255, 213, 0));
+        colors.add(new Color(255, 60, 0));
+        colors.add(new Color(255, 255, 255));
+        colors.add(new Color(196, 106, 3));
+
         for (Player player : players) {
             for (Row row : board.getRows()) {
                 if (row.getCells().contains(player.getCell())) {
                     int x = row.getCells().indexOf(player.getCell());
                     y = board.getRows().indexOf(row);
-                    g.setColor(Color.black);
+                    g.setColor(colors.get(0));
+                    colors.remove(0);
                     g.drawRect(x * 50 + 10, y * 50 + 10, 30, 30);
                     break;
                 }
