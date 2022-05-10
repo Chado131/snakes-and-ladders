@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,17 +35,21 @@ class BoardTest {
         }
     }
 
-    @Test
+    @RepeatedTest(100)
     void takeTurn() {
         Player player = new Player("tester");
         board.takeTurn(player);
+        int cellNumber =  player.getCell().getCellNumber();
+        assertTrue(0 < cellNumber && 8 > cellNumber);
     }
 
     @Test
     void getRows() {
+        assertEquals(10, board.getRows().size());
     }
 
     @Test
     void getMovements() {
+        assertEquals(10, board.getMovements().size());
     }
 }
