@@ -1,17 +1,17 @@
 public class Player {
     String name;
-    Cell cellNumber;
+    Cell cell;
 
     public Player (String name) {
         this.name = name;
     }
 
-    public Cell getCellNumber() {
-        return cellNumber;
+    public Cell getCell() {
+        return cell;
     }
 
-    public void setCellNumber(Cell cellNumber) {
-        this.cellNumber = cellNumber;
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     public boolean hasWon() {
