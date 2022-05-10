@@ -25,24 +25,17 @@ public class Main {
 
             for (int i = 0; i < numPlayers; i++) {
                 System.out.println("");
-                rollDie("Player " + (i + 1) + ", press ENTER to roll your die.");
                 Player player = players.get(i);
                 Die die = player.getDie();
-                board.takeTurn(player);
-                System.out.println(player.getName() + ", you have rolled a " + die.getFace() + ".");
-                gui.showOutput(players);
 
+                takeTurn(player, board, die, gui);
                 if (die.getFace() == 6) {
-                    rollDie("Player " + (i + 1) + ", press ENTER to roll your die.");
-                    board.takeTurn(player);
-                    System.out.println(player.getName() + ", you have rolled a " + die.getFace() + ".");
-                    gui.showOutput(players);
+                    takeTurn(player, board, die, gui);
                 }
             }
-            findWinningPlayer(players);
         }
 
-
+        findWinningPlayer(players);
 
     }
 
@@ -84,14 +77,17 @@ public class Main {
     private static void findWinningPlayer(List<Player> players) {
         for (Player player : players) {
             if (player.hasWon()) {
-                System.out.println(player.getName() + " is the winner. Congratulations");
+                System.out.println(player.getName() + " is the winner. Congratulations!");
                 break;
             }
         }
     }
 
-
-
-
+    private static void takeTurn(Player player, Board board, Die die, SwingGUI gui) {
+        rollDie(player.getName() + ", press ENTER to roll your die.");
+        board.takeTurn(player);
+        System.out.println(player.getName() + ", you have rolled a " + die.getFace() + ".");
+        gui.showOutput(players);
+    }
 
 }

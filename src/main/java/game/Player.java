@@ -26,7 +26,7 @@ public class Player {
     }
 
     public boolean hasWon() {
-        return this.cell.getCellNumber() == 100;
+        return this.cell.getCellNumber() >= 100;
     }
 
     public Die getDie() {
