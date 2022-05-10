@@ -5,7 +5,9 @@ import java.util.Random;
 
 public class Board {
     private final ArrayList<Row> rows = new ArrayList<>();
-    private final ArrayList<Movement> movements = new ArrayList<>();
+
+    private final ArrayList<Snake> snakes = new ArrayList<>();
+    private final ArrayList<Ladder> ladders = new ArrayList<>();
 
     public Board(int size_x, int size_y, int number_of_movements){
         boolean reversed = false;
@@ -24,19 +26,22 @@ public class Board {
             do {
                 top = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
                 bottom = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
-            } while (top - bottom >= 10
+            } while (top - bottom <= 10
                 || getMovementOnCell(new Cell(top)) != null
                 || getMovementOnCell(new Cell(bottom)) != null );
 
             if (random.nextBoolean()){
-                movements.add(new Snake(new Cell(top), new Cell(bottom)));
+                snakes.add(new Snake(new Cell(top), new Cell(bottom)));
             } else {
-                movements.add(new Ladder(new Cell(top), new Cell(bottom)));
+                ladders.add(new Ladder(new Cell(top), new Cell(bottom)));
             }
         }
     }
 
     public Movement getMovementOnCell(Cell cell){
+        ArrayList<Movement> movements = new ArrayList<>();
+        movements.addAll(snakes);
+        movements.addAll(ladders);
         for (Movement movement : movements){
             if (movement.getTop().equals(cell) || movement.getBottom().equals(cell)){
                 return movement;
@@ -62,6 +67,9 @@ public class Board {
     }
 
     public ArrayList<Movement> getMovements() {
+        ArrayList<Movement> movements = new ArrayList<>();
+        movements.addAll(snakes);
+        movements.addAll(ladders);
         return movements;
     }
 }
