@@ -15,7 +15,7 @@ public class Player {
         this.cell = cell;
     }
 
-    public int takeTurn() {
+    public int rollDice() {
         return die.roll();
     }
 
