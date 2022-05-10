@@ -24,7 +24,7 @@ class BoardTest {
                 cellNumber++;
             }
         }
-        assertEquals(100, cellNumber);
+        assertEquals(101, cellNumber);
     }
 
     @Test
