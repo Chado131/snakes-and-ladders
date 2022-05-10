@@ -15,6 +15,12 @@ public abstract class Movement {
         return bottom;
     }
 
+    @Override
+    public String toString() {
+        return "(" + getTop().getCellNumber() + ", " + getBottom().getCellNumber() + ")";
+    }
+
     public abstract void move(Player player);
+    
 
 }

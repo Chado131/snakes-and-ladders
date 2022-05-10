@@ -11,6 +11,9 @@ class BoardTest {
     @BeforeEach
     void setUp() {
         board = new Board(10,10,10);
+        System.out.println(board.getMovements());
+        System.out.println(board.getRows());
+
     }
 
     @Test
@@ -35,8 +38,9 @@ class BoardTest {
         }
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(10)
     void takeTurn() {
+        board.getMovements().clear();
         Player player = new Player("tester");
         board.takeTurn(player);
         int cellNumber =  player.getCell().getCellNumber();
