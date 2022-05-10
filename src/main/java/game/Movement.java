@@ -1,3 +1,5 @@
+package game;
+
 public abstract class Movement {
     private final Cell top;
     private final Cell bottom;
@@ -15,6 +17,12 @@ public abstract class Movement {
         return bottom;
     }
 
+    @Override
+    public String toString() {
+        return "(" + getTop().getCellNumber() + ", " + getBottom().getCellNumber() + ")";
+    }
+
     public abstract void move(Player player);
+    
 
 }

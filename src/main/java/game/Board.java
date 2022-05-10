@@ -1,3 +1,5 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,11 +22,11 @@ public class Board {
             int top;
             int bottom;
             do {
-                top = random.nextInt(size_x) * (size_x * random.nextInt(size_y) - 1);
-                bottom = random.nextInt(size_x) * (size_x * random.nextInt(size_y) - 1);
+                top = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
+                bottom = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
             } while (top - bottom >= 10
-                && getMovementOnCell(new Cell(top)) == null
-                && getMovementOnCell(new Cell(bottom)) == null );
+                || getMovementOnCell(new Cell(top)) != null
+                || getMovementOnCell(new Cell(bottom)) != null );
 
             if (random.nextBoolean()){
                 movements.add(new Snake(new Cell(top), new Cell(bottom)));

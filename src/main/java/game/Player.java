@@ -1,10 +1,16 @@
+package game;
+
 public class Player {
     private String name;
-    private Cell cell;
+    private Cell cell = new Cell(1);
     private final Die die = new Die();
 
     public Player (String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Cell getCell() {

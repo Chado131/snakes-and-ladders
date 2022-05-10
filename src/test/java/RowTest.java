@@ -1,3 +1,5 @@
+import game.Cell;
+import game.Row;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

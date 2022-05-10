@@ -1,3 +1,5 @@
+package game;
+
 public class Cell {
     private final int cellNumber;
 
