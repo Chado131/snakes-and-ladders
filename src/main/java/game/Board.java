@@ -25,9 +25,11 @@ public class Board {
             do {
                 top = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
                 bottom = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
-            } while (top - bottom >= 10
+            } while (top - bottom <= 10
                 || getMovementOnCell(new Cell(top)) != null
-                || getMovementOnCell(new Cell(bottom)) != null );
+                || getMovementOnCell(new Cell(bottom)) != null
+                || top == 1 || top == size_x*size_y
+                || bottom == 1 || bottom == size_x*size_y);
 
             if (random.nextBoolean()){
                 snakes.add(new Snake(new Cell(top), new Cell(bottom)));
@@ -61,6 +63,8 @@ public class Board {
         if (movement != null){
             movement.move(player);
         }
+
+        if (steps == 6) takeTurn(player);
     }
 
     public ArrayList<Row> getRows() {
