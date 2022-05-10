@@ -1,6 +1,7 @@
 public class Player {
-    String name;
-    Cell cell;
+    private String name;
+    private Cell cell;
+    private final Die die = new Die();
 
     public Player (String name) {
         this.name = name;
@@ -14,7 +15,11 @@ public class Player {
         this.cell = cell;
     }
 
+    public int rollDice() {
+        return die.roll();
+    }
+
     public boolean hasWon() {
-        return false;
+        return this.cell.getCellNumber() == 100;
     }
 }
