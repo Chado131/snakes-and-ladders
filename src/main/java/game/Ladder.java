@@ -1,3 +1,5 @@
+package game;
+
 public class Ladder extends Movement {
     public Ladder(Cell top, Cell bottom) {
         super(top, bottom);

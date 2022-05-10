@@ -1,3 +1,7 @@
+import game.Cell;
+import game.Movement;
+import game.Player;
+import game.Snake;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

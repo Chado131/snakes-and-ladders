@@ -1,3 +1,5 @@
+package game;
+
 public class Snake extends Movement {
     public Snake(Cell top, Cell bottom) {
         super(top, bottom);

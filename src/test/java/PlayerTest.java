@@ -1,3 +1,5 @@
+import game.Cell;
+import game.Player;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
