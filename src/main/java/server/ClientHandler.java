@@ -1,5 +1,8 @@
 package server;
 
+import com.google.gson.Gson;
+import game.Board;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,12 +23,17 @@ public class ClientHandler extends Thread{
              final PrintStream out = new PrintStream(socket.getOutputStream())) {
 
             while((messageFromClient = in.readLine()) != null) {
-
-                out.println("response");
+                Board board = new Board (10, 10, 10);
+                out.println(serialize(board));
             }
 
         } catch(IOException ex) {
             System.out.println ("Shutting down server : " + ex);
         }
+    }
+
+    public static String serialize(Board board){
+        Gson gson = new Gson();
+        return gson.toJson(board);
     }
 }
