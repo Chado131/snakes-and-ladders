@@ -157,6 +157,7 @@ public class SwingGUI extends JComponent{
     }
 
     public void showOutput(ArrayList<Player> players) {
-
+        this.players.clear();
+        this.players.addAll(players);
     }
 }
