@@ -35,10 +35,8 @@ public class Board {
     }
 
     public Movement getMovementOnCell(Cell cell){
-        System.out.println(cell.getCellNumber());
         for (Movement movement : movements){
             if (movement.getTop().equals(cell) || movement.getBottom().equals(cell)){
-                System.out.println(movement);
                 return movement;
             }
         }
