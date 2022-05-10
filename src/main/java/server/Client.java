@@ -29,8 +29,12 @@ public class Client {
             String serverResponse = in.readLine();
 
             SwingGUI gui = new SwingGUI(deSerialize(serverResponse));
-            ArrayList<Player> players = new ArrayList<>();
-            gui.showOutput (players);
+
+
+            do {
+
+            } while(input.equals("quit"))
+
         } catch (IOException e) {
             e.printStackTrace ();
         }
