@@ -2,13 +2,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-    private final ArrayList<Player> players = new ArrayList<>();
     private final ArrayList<Row> rows = new ArrayList<>();
     private final ArrayList<Movement> movements = new ArrayList<>();
 
     public Board(int size_x, int size_y, int number_of_movements){
+        boolean reversed = false;
         for (int y = 0; y < size_y; y++){
-            rows.add(new Row(size_x * y + 1, size_x * y + size_x));
+            if (reversed){
+                rows.add(new Row(size_x * y + 1, size_x * y + size_x));
+            } else {
+                rows.add(new Row(size_x * y + size_x, size_x * y + 1));
+            }
+            reversed = !reversed;
         }
         Random random = new Random();
         for (int i = 0; i < number_of_movements; i++){
@@ -27,11 +32,6 @@ public class Board {
                 movements.add(new Ladder(new Cell(top), new Cell(bottom)));
             }
         }
-
-    }
-
-    public void addPlayer(String name){
-        this.players.add(new Player(name));
     }
 
     public Movement getMovementOnCell(Cell cell){
@@ -45,7 +45,8 @@ public class Board {
 
     public void takeTurn(Player player){
         int steps = player.rollDice();
-        Cell newCell = new Cell(player.getCell().getCellNumber()+steps);
+        Cell currentCell = player.getCell();
+        Cell newCell = new Cell(currentCell.getCellNumber()+steps);
         Movement movement = getMovementOnCell(newCell);
 
         player.setCell(newCell);
@@ -54,4 +55,11 @@ public class Board {
         }
     }
 
+    public ArrayList<Row> getRows() {
+        return rows;
+    }
+
+    public ArrayList<Movement> getMovements() {
+        return movements;
+    }
 }
