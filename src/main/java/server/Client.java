@@ -30,10 +30,14 @@ public class Client {
 
             SwingGUI gui = new SwingGUI(deSerialize(serverResponse));
 
-
+            String input = "";
             do {
-
-            } while(input.equals("quit"))
+                input = getInput("Your Turn (Push Enter To Roll the Dice) : ");
+                out.println("");
+                out.flush();
+                String players = in.readLine();
+                gui.showOutput(deSerializePlayers(players));
+            } while(input.equals("quit"));
 
         } catch (IOException e) {
             e.printStackTrace ();
@@ -58,5 +62,16 @@ public class Client {
     public static Board deSerialize(String json){
         Gson gson = new Gson();
         return gson.fromJson(json,Board.class);
+    }
+
+    /**
+     * this function uses Google Gson a java
+     * Takes in a string Json and makes a response object
+     * @param json : the string to be converted
+     * @return a response object
+     */
+    public static ArrayList<Player> deSerializePlayers(String json){
+        Gson gson = new Gson();
+        return gson.fromJson(json, ArrayList.class);
     }
 }
