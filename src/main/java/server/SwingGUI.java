@@ -1,14 +1,12 @@
 package server;
 
-import game.Board;
-import game.Cell;
-import game.Player;
-import game.Row;
+import game.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.*;
 import java.awt.Color;
 import java.util.List;
@@ -20,9 +18,11 @@ public class SwingGUI extends JComponent{
 
     private final JFrame frame;
     private final Board board;
+    private final ArrayList<Player> players;
 
     public SwingGUI(Board board){
         this.board = board;
+        this.players = new ArrayList<>();
 
         frame = new JFrame("SNAKES and LADDERS");
         frame.setIconImage(new ImageIcon("assets/images/" + "icon.png").getImage());
@@ -52,23 +52,73 @@ public class SwingGUI extends JComponent{
             isGreen = !isGreen;
             for (Cell cell : row.getCells()){
                 if (isGreen) {
-                    g.setColor(Color.GREEN);
+                    g.setColor(new Color(126, 217, 126));
                 } else {
-                    g.setColor(Color.YELLOW);
+                    g.setColor(new Color(255, 249, 137));
                 }
 
                 isGreen = !isGreen;
 
                 g.fillRect(x, y, 50, 50);
-//                        WIDTH/(board.getRows().get(0).getCells().size()-1),
-//                        HEIGHT/(board.getRows().size()));
 
+                g.setColor(Color.RED);
+                g.drawString(String.valueOf(cell.getCellNumber()), x+18, y+25);
                 x+=50;
-//                x+=board.getRows().get(0).getCells().size()*5;
             }
             y+=50;
-//            y+=HEIGHT/board.getRows().size();
         }
+
+        for (Movement movement: board.getMovements()){
+            int top = movement.getTop().getCellNumber();
+            int bottom = movement.getBottom().getCellNumber();
+            if (movement.getClass() == Snake.class){
+                g.setColor(new Color(0 ,100, 0));;
+            } else {
+                g.setColor(new Color(173, 132, 6));
+            }
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 0;
+
+            for (Row row : board.getRows()){
+                if (row.getCells().contains(movement.getTop())){
+                    x1 = row.getCells().indexOf(movement.getTop());
+                    y1 = board.getRows().indexOf(row);
+                }
+                if (row.getCells().contains(movement.getBottom())){
+                    x2 = row.getCells().indexOf(movement.getBottom());
+                    y2 = board.getRows().indexOf(row);
+                }
+            }
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(10));
+            g2.drawLine(x1*50+25,y1*50+25,x2*50+25,y2*50+25);
+        }
+
+        for (Player player : players) {
+            for (Row row : board.getRows()) {
+                if (row.getCells().contains(player.getCell())) {
+                    int x = row.getCells().indexOf(player.getCell());
+                    y = board.getRows().indexOf(row);
+                    g.setColor(Color.black);
+                    g.drawRect(x * 50 + 10, y * 50 + 10, 30, 30);
+                    break;
+                }
+            }
+        }
+
+        y=0;
+        for (Row row : board.getRows()){
+            int x = 0;
+            for (Cell cell : row.getCells()){
+                g.setColor(new Color(16, 2, 40));
+                g.drawString(String.valueOf(cell.getCellNumber()), x+18, y+25);
+                x+=50;
+            }
+            y+=50;
+        }
+
 
     }
 
