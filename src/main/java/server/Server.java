@@ -14,7 +14,6 @@ public class Server {
                 Socket socket = s.accept();
                 System.out.println("Connection: " + socket);
                 Thread r = new ClientHandler(socket);
-//                Thread task = new Thread(r);
                 r.start();
             } catch (IOException ex) {
                 ex.printStackTrace();
