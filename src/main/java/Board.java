@@ -43,4 +43,15 @@ public class Board {
         return null;
     }
 
+    public void takeTurn(Player player){
+        int steps = player.rollDice();
+        Cell newCell = new Cell(player.getCell().getCellNumber()+steps);
+        Movement movement = getMovementOnCell(newCell);
+
+        player.setCell(newCell);
+        if (movement != null){
+            movement.move(player);
+        }
+    }
+
 }

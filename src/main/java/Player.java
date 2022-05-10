@@ -14,8 +14,8 @@ public class Player {
         this.cell = cell;
     }
 
-    public void takeTurn() {
-
+    public int rollDice() {
+        return 1;
     }
 
     public boolean hasWon() {
