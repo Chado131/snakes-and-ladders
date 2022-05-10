@@ -7,6 +7,10 @@ public class Player {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Cell getCell() {
         return cell;
     }
