@@ -10,10 +10,11 @@ import java.util.Scanner;
 public class Main {
     static ArrayList<Player> players = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-    static SwingGUI gui = new SwingGUI(new Board(10, 10, 10));
 
     public static void main(String[] args) {
         Board board = new Board(10, 10, 10);
+        SwingGUI gui = new SwingGUI(board);
+
         System.out.println("~~~~~~~~~ SNAKES AND LADDERS ~~~~~~~~~");
         System.out.println("");
 
@@ -29,17 +30,19 @@ public class Main {
                 Die die = player.getDie();
                 board.takeTurn(player);
                 System.out.println(player.getName() + ", you have rolled a " + die.getFace() + ".");
-                System.out.println(player.getName() + ", you are now on cell " + player.getCell().getCellNumber() + ".");
+                gui.showOutput(players);
 
                 if (die.getFace() == 6) {
                     rollDie("Player " + (i + 1) + ", press ENTER to roll your die.");
                     board.takeTurn(player);
                     System.out.println(player.getName() + ", you have rolled a " + die.getFace() + ".");
-                    System.out.println(player.getName() + ", you are now on cell " + player.getCell().getCellNumber() + ".");
+                    gui.showOutput(players);
                 }
             }
-
+            findWinningPlayer(players);
         }
+
+
 
     }
 
@@ -77,6 +80,17 @@ public class Main {
         System.out.println(prompt);
         String input = scanner.nextLine();
     }
+
+    private static void findWinningPlayer(List<Player> players) {
+        for (Player player : players) {
+            if (player.hasWon()) {
+                System.out.println(player.getName() + " is the winner. Congratulations");
+                break;
+            }
+        }
+    }
+
+
 
 
 
