@@ -61,8 +61,6 @@ public class SwingGUI extends JComponent{
 
                 g.fillRect(x, y, 50, 50);
 
-                g.setColor(Color.RED);
-                g.drawString(String.valueOf(cell.getCellNumber()), x+18, y+25);
                 x+=50;
             }
             y+=50;
@@ -72,7 +70,7 @@ public class SwingGUI extends JComponent{
             int top = movement.getTop().getCellNumber();
             int bottom = movement.getBottom().getCellNumber();
             if (movement.getClass() == Snake.class){
-                g.setColor(new Color(0 ,100, 0));;
+                g.setColor(new Color(0 ,100, 0));
             } else {
                 g.setColor(new Color(173, 132, 6));
             }
@@ -92,8 +90,14 @@ public class SwingGUI extends JComponent{
                 }
             }
             Graphics2D g2 = (Graphics2D) g;
-            g2.setStroke(new BasicStroke(10));
+            g2.setStroke(new BasicStroke(5));
             g2.drawLine(x1*50+25,y1*50+25,x2*50+25,y2*50+25);
+
+            if (movement.getClass() == Snake.class){
+                g.fillRect(x1*50+15,y1*50+15, 20,20);
+            } else {
+                g.fillRect(x2*50+15,y2*50+15, 20,20);
+            }
         }
 
         for (Player player : players) {
@@ -113,7 +117,7 @@ public class SwingGUI extends JComponent{
             int x = 0;
             for (Cell cell : row.getCells()){
                 g.setColor(new Color(16, 2, 40));
-                g.drawString(String.valueOf(cell.getCellNumber()), x+18, y+25);
+                g.drawString(String.valueOf(cell.getCellNumber()), x+18, y+29);
                 x+=50;
             }
             y+=50;
