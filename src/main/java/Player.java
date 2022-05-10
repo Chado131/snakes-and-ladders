@@ -1,6 +1,6 @@
 public class Player {
     private String name;
-    private Cell cell;
+    private Cell cell = new Cell(1);
     private final Die die = new Die();
 
     public Player (String name) {
