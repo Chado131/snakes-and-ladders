@@ -31,8 +31,10 @@ public class Client {
             SwingGUI gui = new SwingGUI(deSerialize(serverResponse));
 
             String input = "";
+            System.out.println("(Push Enter To Roll the Dice)");
             do {
-                input = getInput("Your Turn (Push Enter To Roll the Dice) : ");
+                input = gui.getInput();
+//                input = getInput();
                 out.println("");
                 out.flush();
                 String players = in.readLine();

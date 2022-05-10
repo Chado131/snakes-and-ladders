@@ -4,6 +4,8 @@ import game.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.*;
 import java.awt.Color;
 
@@ -15,6 +17,8 @@ public class SwingGUI extends JComponent{
     private final JFrame frame;
     private final Board board;
     private final ArrayList<Player> players;
+
+    private String input = "";
 
     public SwingGUI(Board board){
         this.board = board;
@@ -31,6 +35,21 @@ public class SwingGUI extends JComponent{
 
         setFocusable(true);
         start();
+
+        this.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                        input = "continue";
+                        break;
+                    case KeyEvent.VK_ESCAPE:
+                        input = "quit";
+                        break;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -156,4 +175,12 @@ public class SwingGUI extends JComponent{
         this.players.clear();
         this.players.addAll(players);
     }
+
+    public String getInput() {
+        if (input.equals("")) return getInput();
+        String temp = input;
+        input = "";
+        return temp;
+    }
+
 }
