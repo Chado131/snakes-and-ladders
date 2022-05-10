@@ -5,10 +5,10 @@ public class Die {
 
     public Die() {
         this.random = new Random();
-
     }
 
     public int roll() {
         return random.nextInt(6) + 1;
     }
+
 }
