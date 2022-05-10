@@ -33,9 +33,9 @@ public class Client {
             String input = "";
             System.out.println("(Push Enter To Roll the Dice)");
             do {
-                input = gui.getInput();
+                input = getInput("");
 //                input = getInput();
-                out.println("");
+                out.println(" ");
                 out.flush();
                 String players = in.readLine();
                 gui.showOutput(deSerializePlayers(players));
