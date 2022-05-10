@@ -14,7 +14,11 @@ public class Player {
         this.cell = cell;
     }
 
+    public void takeTurn() {
+
+    }
+
     public boolean hasWon() {
-        return false;
+        return this.cell.getCellNumber () == 100;
     }
 }
