@@ -5,8 +5,7 @@ import java.util.Random;
 
 public class Board {
     private final ArrayList<Row> rows = new ArrayList<>();
-    private final ArrayList<Ladder> ladders = new ArrayList<>();
-    private final ArrayList<Snake> snakes = new ArrayList<> ();
+    private final ArrayList<Movement> movements = new ArrayList<>();
 
     public Board(int size_x, int size_y, int number_of_movements){
         boolean reversed = false;
@@ -25,27 +24,20 @@ public class Board {
             do {
                 top = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
                 bottom = random.nextInt(size_x) + (size_x * random.nextInt(size_y) - 1);
-            } while (top - bottom <= 10
+            } while (top - bottom >= 10
                 || getMovementOnCell(new Cell(top)) != null
-                || getMovementOnCell(new Cell(bottom)) != null
-                || top == 1 || top == size_x*size_y
-                || bottom == 1 || bottom == size_x*size_y);
+                || getMovementOnCell(new Cell(bottom)) != null );
 
             if (random.nextBoolean()){
-                snakes.add(new Snake(new Cell(top), new Cell(bottom)));
+                movements.add(new Snake(new Cell(top), new Cell(bottom)));
             } else {
-                ladders.add(new Ladder(new Cell(top), new Cell(bottom)));
+                movements.add(new Ladder(new Cell(top), new Cell(bottom)));
             }
         }
     }
 
     public Movement getMovementOnCell(Cell cell){
-        for (Movement movement : snakes){
-            if (movement.getTop().equals(cell) || movement.getBottom().equals(cell)){
-                return movement;
-            }
-        }
-        for (Movement movement : ladders){
+        for (Movement movement : movements){
             if (movement.getTop().equals(cell) || movement.getBottom().equals(cell)){
                 return movement;
             }
@@ -63,19 +55,13 @@ public class Board {
         if (movement != null){
             movement.move(player);
         }
-
-        if (steps == 6) takeTurn(player);
     }
 
     public ArrayList<Row> getRows() {
         return rows;
     }
 
-    public ArrayList<Ladder> getLadders() {
-        return ladders;
-    }
-
-    public ArrayList<Snake> getSnakes() {
-        return snakes;
+    public ArrayList<Movement> getMovements() {
+        return movements;
     }
 }

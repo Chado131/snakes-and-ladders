@@ -29,7 +29,7 @@ public class Client {
             String serverResponse = in.readLine();
 
             SwingGUI gui = new SwingGUI(deSerialize(serverResponse));
-            ArrayList<Player> players = new ArrayList<> ();
+            ArrayList<Player> players = new ArrayList<>();
             gui.showOutput (players);
         } catch (IOException e) {
             e.printStackTrace ();
