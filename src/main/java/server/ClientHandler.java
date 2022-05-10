@@ -31,11 +31,12 @@ public class ClientHandler extends Thread{
             out.println(serialize(Server.getboard()));
             System.out.println(serialize(Server.getboard()));
 
+            ServerIn t = new ServerIn(out);
+            t.start();
+
             while((messageFromClient = in.readLine()) != null) {
                 in.readLine();
                 Server.play(player);
-                System.out.println(playerSerialize(Server.getPlayers()));
-                out.println(playerSerialize(Server.getPlayers()));
             }
 
         } catch(IOException ex) {
@@ -51,5 +52,22 @@ public class ClientHandler extends Thread{
     public static String serialize(Board board){
         Gson gson = new Gson();
         return gson.toJson(board);
+    }
+
+    private static class ServerIn extends Thread{
+        PrintStream out;
+        public ServerIn(PrintStream out) {
+            this.out = out;
+        }
+
+        @Override
+        public void run() {
+            System.out.println(playerSerialize(Server.getPlayers()));
+            out.println(playerSerialize(Server.getPlayers()));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package server;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import game.Board;
 import game.Player;
 
@@ -32,14 +33,15 @@ public class Client {
 
             String input = "";
             System.out.println("(Push Enter To Roll the Dice)");
+
+            ServerIn t = new ServerIn(in, gui);
+            t.start();
+
             do {
-                input = getInput("");
-//                input = getInput();
+                input = gui.getInput();
                 out.println(" ");
                 out.flush();
-                String players = in.readLine();
-                gui.showOutput(deSerializePlayers(players));
-            } while(input.equals("quit"));
+            } while(!input.equals("quit"));
 
         } catch (IOException e) {
             e.printStackTrace ();
@@ -74,6 +76,23 @@ public class Client {
      */
     public static ArrayList<Player> deSerializePlayers(String json){
         Gson gson = new Gson();
-        return gson.fromJson(json, ArrayList.class);
+        return gson.fromJson(json, new TypeToken<ArrayList<Player>>(){}.getType());
+    }
+
+    private static class ServerIn extends Thread{
+        BufferedReader in;
+        SwingGUI gui;
+        public ServerIn(BufferedReader in, SwingGUI gui) {
+            this.in = in;
+            this.gui = gui;
+        }
+
+        @Override
+        public void run() {
+            try {
+                gui.showOutput(deSerializePlayers(in.readLine()));
+            } catch (IOException e) {
+                            }
+        }
     }
 }
