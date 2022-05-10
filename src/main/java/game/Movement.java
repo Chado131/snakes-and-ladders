@@ -1,3 +1,5 @@
+package game;
+
 public abstract class Movement {
     private final Cell top;
     private final Cell bottom;

@@ -1,2 +1,4 @@
-package server;public class ClientHandler {
+package server;
+
+public class ClientHandler extends Thread{
 }
