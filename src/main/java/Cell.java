@@ -21,6 +21,6 @@ public class Cell {
 
         Cell position = (Cell) o;
 
-        return cellNumber != position.cellNumber;
+        return cellNumber == position.cellNumber;
     }
 }
